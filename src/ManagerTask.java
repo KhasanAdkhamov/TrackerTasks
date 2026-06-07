@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ManagerTask <T extends Task>{
     private Map<Integer, T>  tasks;
@@ -23,8 +20,23 @@ public class ManagerTask <T extends Task>{
         System.out.println("tasks were deleted");
     }
 
+    public T getTask(int id) {
+        if (!tasks.containsKey(id)) {
+            throw new NullPointerException("идентификатор не найден, попробуй другой");
+        }
+        return tasks.get(id);
+    }
 
-    public void createTask() {
+
+    public void createTask(Scanner scanner) {
+        String nameOfTask = null;
+        String description = null;
+        System.out.println("Введите название задачи");
+        nameOfTask = scanner.next();
+        System.out.println("Введите описание");
+        description = scanner.next();
+        Task task = new Task(nameOfTask, description);
+        System.out.println("Создана задача " + task.getId() + " " + task.getStatus() + " " + task.getName());
     }
 
     public void updateStatus() {

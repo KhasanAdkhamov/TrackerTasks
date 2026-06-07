@@ -15,22 +15,25 @@ public class App {
                     return;
                 }
                 case 1 -> {
-                    managerTask.getEntry();
+                    //managerTask.getEntry();
                 }
                 case 2 -> {
-                    managerTask.deleteTasks();
+                    //managerTask.deleteTasks();
                 }
                 case 3 -> {
-                    managerTask.createTask();
+                    managerTask.createTask(scanner);
                 }
                 case 4 -> {
-                    managerTask.updateStatus();
+                    //managerTask.updateStatus();
                 }
                 case 5 -> {
-                    managerTask.deleteTask();
+                    //managerTask.deleteTask();
                 }
                 case 6 -> {
-                    managerTask.getSubtasksList();
+                    //managerTask.getSubtasksList();
+                }
+                case 7 -> {
+                    //managerTask.getTask();
                 }
 
             }
@@ -47,6 +50,7 @@ public class App {
         System.out.println("4.Обновить статус задачи");
         System.out.println("5.Удалить задачи");
         System.out.println("6.Получить подзадачи определенного эпика");
+        System.out.println("7.Получение по идентификатору.");
     }
 
 }
