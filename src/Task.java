@@ -15,4 +15,20 @@ public class Task {
     public StatusTask getStatus() {
         return this.status;
     }
+
+    public static int getIdCounter() {
+        return idCounter;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getId() {
+        return id;
+    }
 }

@@ -12,4 +12,10 @@ public class Epic extends Task{
     public List<SubTask> getSubTasksList() {
         return subTasksList;
     }
+
+    public void addSubtask(SubTask subTask) {
+        subTasksList.add(subTask);
+        System.out.println("Добавлен в эпик " + subTask.getName());
+        subTask.setEpic(this);
+    }
 }
