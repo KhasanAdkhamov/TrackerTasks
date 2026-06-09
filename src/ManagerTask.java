@@ -1,42 +1,46 @@
 import java.util.*;
 
 public class ManagerTask <T extends Task>{
-    private Map<Integer, T>  tasks;
+    private Map<Integer, T>  tasks = new HashMap<>();
 
     public ManagerTask() {}
 
-    public List<T> getEntry(Map<Integer, T> tasks) {
-        List<T> tasksValues = new ArrayList<>();
-        for (T value : tasks.values()) {
-            tasksValues.add(value);
+    public void getMapTasks() {
+        if (tasks.isEmpty()) {
+            throw new NullPointerException("Пока нет задач");
         }
-        return tasksValues;
+        System.out.println(tasks);
+
     }
 
-    public void deleteTasks(Map<Integer, T> tasks) {
+    public void deleteTasks() {
         for (Integer key : tasks.keySet()) {
             tasks.remove(key);
         }
         System.out.println("tasks were deleted");
     }
 
-    public T getTask(int id) {
-        if (!tasks.containsKey(id)) {
-            throw new NullPointerException("идентификатор не найден, попробуй другой");
+    public void getTask(Scanner scanner) {
+        System.out.println("Введите id задачи");
+        int id = scanner.nextInt();
+        if (tasks.containsKey(id)) {
+            System.out.println(tasks.get(id));
+        } else {
+            throw new NullPointerException("нет такого " + id + " id задачи не найден");
         }
-        return tasks.get(id);
     }
 
 
     public void createTask(Scanner scanner) {
-        String nameOfTask = null;
-        String description = null;
+        String nameOfTask;
+        String description;
         System.out.println("Введите название задачи");
         nameOfTask = scanner.next();
         System.out.println("Введите описание");
         description = scanner.next();
         Task task = new Task(nameOfTask, description);
         System.out.println("Создана задача " + task.getId() + " " + task.getStatus() + " " + task.getName());
+        tasks.put(task.getId(), (T) task);
     }
 
     public void updateStatus() {
@@ -47,4 +51,5 @@ public class ManagerTask <T extends Task>{
 
     public void getSubtasksList() {
     }
+
 }

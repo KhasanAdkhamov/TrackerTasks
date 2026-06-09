@@ -8,6 +8,7 @@ public class App {
         while (true) {
             printMenu();
             int command = scanner.nextInt();
+            scanner.nextLine();
             switch (command) {
                 case 0 ->  {
                     System.out.println("exit");
@@ -15,10 +16,10 @@ public class App {
                     return;
                 }
                 case 1 -> {
-                    //managerTask.getEntry();
+                    managerTask.getMapTasks();
                 }
                 case 2 -> {
-                    //managerTask.deleteTasks();
+                    managerTask.deleteTasks();
                 }
                 case 3 -> {
                     managerTask.createTask(scanner);
@@ -33,7 +34,7 @@ public class App {
                     //managerTask.getSubtasksList();
                 }
                 case 7 -> {
-                    //managerTask.getTask();
+                    managerTask.getTask(scanner);
                 }
 
             }
