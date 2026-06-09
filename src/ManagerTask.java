@@ -35,15 +35,16 @@ public class ManagerTask <T extends Task>{
         String nameOfTask;
         String description;
         System.out.println("Введите название задачи");
-        nameOfTask = scanner.next();
+        nameOfTask = scanner.nextLine();
         System.out.println("Введите описание");
-        description = scanner.next();
+        description = scanner.nextLine();
         Task task = new Task(nameOfTask, description);
         System.out.println("Создана задача " + task.getId() + " " + task.getStatus() + " " + task.getName());
         tasks.put(task.getId(), (T) task);
     }
 
     public void updateStatus() {
+
     }
 
     public void deleteTask() {
