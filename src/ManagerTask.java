@@ -8,7 +8,7 @@ public class ManagerTask {
     public ManagerTask() {}
 
     public void getMapTasks() {
-        if (tasks.isEmpty() ) {
+        if (tasks.isEmpty() && epics.isEmpty()) {
             throw new NullPointerException("Пока нет задач");
         }
         System.out.println(tasks);
