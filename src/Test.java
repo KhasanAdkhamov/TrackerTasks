@@ -6,7 +6,5 @@ public class Test {
 
         SubTask subTask = new SubTask("macbook", "earn money");
         System.out.println(subTask.getStatus());
-
-
     }
 }

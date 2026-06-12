@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ManagerTask<Task> managerTask = new ManagerTask<>();
+        ManagerTask managerTask = new ManagerTask();
 
         while (true) {
             printMenu();
