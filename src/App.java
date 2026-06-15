@@ -25,7 +25,7 @@ public class App {
                     managerTask.createTask(scanner);
                 }
                 case 4 -> {
-                    //managerTask.updateStatus();
+                    managerTask.updateStatus(scanner);
                 }
                 case 5 -> {
                     //managerTask.deleteTask();
@@ -36,7 +36,7 @@ public class App {
                 case 7 -> {
                     managerTask.getTask(scanner);
                 }
-
+                default -> throw new IllegalStateException("Unexpected value: " + command);
             }
         }
 

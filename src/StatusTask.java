@@ -9,4 +9,11 @@ public enum StatusTask {
         this.name = name;
     }
 
+    public StatusTask next() {
+        StatusTask[] statusTasks = StatusTask.values();
+        int currentStatus = this.ordinal();
+        int i = (currentStatus + 1) % statusTasks.length;
+        return statusTasks[i];
+
+    }
 }

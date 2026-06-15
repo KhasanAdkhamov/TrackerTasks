@@ -82,7 +82,14 @@ public class ManagerTask {
 
     }
 
-    public void updateStatus() {
+    public void updateStatus(Scanner scanner) {
+        System.out.println("Выбери задачи у которой нужно обновить статус");
+        getMapTasks();
+        System.out.println("Введи id задачи");
+        Task task = getTaskForStatus(scanner);
+        StatusTask status = task.getStatus();
+        StatusTask newStatus = status.next();
+        System.out.println("Статус задачи обновлен до " + newStatus + " у задачи " + task.getName());
 
     }
 
@@ -92,4 +99,12 @@ public class ManagerTask {
     public void getSubtasksList() {
     }
 
+    public Task getTaskForStatus(Scanner scanner) {
+        int id = scanner.nextInt();
+        if (!tasks.containsKey(id)) {
+            return null;
+        } else {
+            return tasks.get(id);
+        }
+    }
 }
