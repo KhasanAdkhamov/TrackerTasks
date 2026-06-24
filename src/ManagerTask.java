@@ -82,7 +82,7 @@ public class ManagerTask {
 
     }
 
-    public void updateStatus(Scanner scanner) {
+    public  void updateStatus(Scanner scanner) {
         System.out.println("Выбери задачи у которой нужно обновить статус");
         getMapTasks();
         System.out.println("Введи id задачи");
@@ -101,10 +101,14 @@ public class ManagerTask {
 
     public Task getTaskForStatus(Scanner scanner) {
         int id = scanner.nextInt();
-        if (!tasks.containsKey(id)) {
-            return null;
-        } else {
+        if (tasks.containsKey(id)) {
             return tasks.get(id);
+        } else if (epics.containsKey(id)){
+            return epics.get(id);
+        } else if (subTasks.containsKey(id)) {
+            return subTasks.get(id);
+        } else {
+            return null;
         }
     }
 }
