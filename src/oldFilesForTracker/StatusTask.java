@@ -1,3 +1,5 @@
+package oldFilesForTracker;
+
 public enum StatusTask {
     NEW("created"),
     IN_PROGRESS("processing"),

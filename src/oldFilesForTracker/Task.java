@@ -1,9 +1,11 @@
+package oldFilesForTracker;
+
 public class Task {
     private String name;
     private String description;
     private static int idCounter = 1;
     private final int id;
-    private Status status = Status.NEW;
+    private StatusTask status = StatusTask.NEW;
 
     public Task(String name, String description) {
         this.name = name;
@@ -11,21 +13,28 @@ public class Task {
         this.id = idCounter++;
     }
 
+    public StatusTask getStatus() {
+        return this.status;
+    }
+
+    public static int getIdCounter() {
+        return idCounter;
+    }
+
     public String getName() {
         return name;
+    }
+    public String getDescription() {
+        return description;
     }
 
     public int getId() {
         return id;
     }
 
-    public Status getStatus() {
-        return status;
-    }
-
     @Override
     public String toString() {
-        return "Task{" +
+        return "oldFilesForTracker.Task{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", id=" + id +

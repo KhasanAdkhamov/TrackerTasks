@@ -1,7 +1,7 @@
 Классы
-Task, Epic, Subtask, ManagerTasks, Enum со статусами задачи.
-Epic и Subtask будут наследоваться от Task.
-Epic будет содержать список Subtask.
+oldFilesForTracker.Task, oldFilesForTracker.Epic, Subtask, ManagerTasks, Enum со статусами задачи.
+oldFilesForTracker.Epic и Subtask будут наследоваться от oldFilesForTracker.Task.
+oldFilesForTracker.Epic будет содержать список Subtask.
 
 Задачи будут храниться HashMap, ключом будет id, значение сама задача.
 Хранение реализовать в ManagerTasks, 3 разных Map для разных задач.

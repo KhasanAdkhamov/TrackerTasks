@@ -1,0 +1,59 @@
+package oldFilesForTracker;
+
+import java.util.Scanner;
+
+public class App {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ManagerTask managerTask = new ManagerTask();
+
+        while (true) {
+            printMenu();
+            int command = scanner.nextInt();
+            scanner.nextLine();
+            switch (command) {
+                case 0 ->  {
+                    System.out.println("exit");
+                    scanner.close();
+                    return;
+                }
+                case 1 -> {
+                    managerTask.getMapTasks();
+                }
+                case 2 -> {
+                    managerTask.deleteTasks();
+                }
+                case 3 -> {
+                    managerTask.createTask(scanner);
+                }
+                case 4 -> {
+                    managerTask.updateStatus(scanner);
+                }
+                case 5 -> {
+                    //managerTask.deleteTask();
+                }
+                case 6 -> {
+                    //managerTask.getSubtasksList();
+                }
+                case 7 -> {
+                    managerTask.getTask(scanner);
+                }
+                default -> throw new IllegalStateException("Unexpected value: " + command);
+            }
+        }
+
+    }
+
+    public static void printMenu() {
+        System.out.println("Трекер Задач");
+        System.out.println("0.Выход");
+        System.out.println("1.Получение списка всех задач.");
+        System.out.println("2. Удаление всех задач.");
+        System.out.println("3.Создать задачу");
+        System.out.println("4.Обновить статус задачи");
+        System.out.println("5.Удалить задачи");
+        System.out.println("6.Получить подзадачи определенного эпика");
+        System.out.println("7.Получение по идентификатору.");
+    }
+
+}

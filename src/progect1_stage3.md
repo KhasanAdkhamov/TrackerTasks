@@ -7,7 +7,7 @@
 Как системы контроля версий помогают команде работать с общим кодом, так и трекеры задач позволяют эффективно организовать совместную работу над задачами. Вам предстоит написать бэкенд для такого трекера. В итоге должна получиться программа, отвечающая за формирование модели данных для этой страницы:
 
 💡 **Пользователь не будет видеть консоль вашего приложения.** Поэтому нужно сделать так, чтобы методы не просто печатали что-то в консоль, но и возвращали объекты нужных типов.  
-Вы можете добавить консольный вывод для самопроверки в класcе Main, но на работу методов он влиять не должен.
+Вы можете добавить консольный вывод для самопроверки в класcе oldFilesForTracker.Main, но на работу методов он влиять не должен.
 
 ## Типы задач
 
@@ -31,7 +31,7 @@
 
 У одной и той же проблемы в программировании может быть несколько решений. К примеру, вам нужно представить в программе три вида связанных сущностей: задачи, подзадачи и эпики. Вы можете завести один абстрактный класс и связать три других с ним. Или создать один не абстрактный класс и двух его наследников. Или сделать три отдельных класса. Задача программиста — не только сделать выбор, но и обосновать его. Вне зависимости от того, по какому пути вы решите пойти, каждое из этих решений будет лучше в одних ситуациях и хуже в других.
 
-На наш взгляд, самым безопасным способом решения этой задачи будет создание публичного не абстрактного класса `Task`. Он представляет отдельно стоящую задачу. Далее от него создать два подкласса: `Subtask` и `Epic`. Такая структура с одной стороны позволит менять свойства сразу всех видов задач, а с другой — оставит пространство для манёвров, если потребуется изменить только одну из них.
+На наш взгляд, самым безопасным способом решения этой задачи будет создание публичного не абстрактного класса `oldFilesForTracker.Task`. Он представляет отдельно стоящую задачу. Далее от него создать два подкласса: `Subtask` и `oldFilesForTracker.Epic`. Такая структура с одной стороны позволит менять свойства сразу всех видов задач, а с другой — оставит пространство для манёвров, если потребуется изменить только одну из них.
 
 ## Идентификатор задачи
 
@@ -73,7 +73,7 @@
 
 ## Обновление данных
 
-При обновлении можете считать, что на вход подаётся новый объект, который должен полностью заменить старый. К примеру, метод для обновления эпика может принимать эпик в качестве входных данных `public void updateTask(Task task)`. Если вы храните эпики в `HashMap`, где ключами являются идентификаторы, то обновление — это запись нового эпика `tasks.put(task.getId(), task)`.
+При обновлении можете считать, что на вход подаётся новый объект, который должен полностью заменить старый. К примеру, метод для обновления эпика может принимать эпик в качестве входных данных `public void updateTask(oldFilesForTracker.Task task)`. Если вы храните эпики в `HashMap`, где ключами являются идентификаторы, то обновление — это запись нового эпика `tasks.put(task.getId(), task)`.
 
 ## Обновление статуса задачи
 
@@ -87,7 +87,7 @@
 
 ## И ещё кое-что...
 
-Cам процесс тестирования можно начать уже сейчас. Создайте в классе `Main` метод `static void main(String[] args)` и внутри него:
+Cам процесс тестирования можно начать уже сейчас. Создайте в классе `oldFilesForTracker.Main` метод `static void main(String[] args)` и внутри него:
 - Создайте 2 задачи, один эпик с 2 подзадачами, а другой эпик с 1 подзадачей.
 - Распечатайте списки эпиков, задач и подзадач, через `System.out.println(..)`
 - Измените статусы созданных объектов, распечатайте. Проверьте, что статус задачи и подзадачи сохранился, а статус эпика рассчитался по статусам подзадач.
@@ -271,8 +271,9 @@ public class InMemoryTaskManager implements TaskManager { … }
  
 2. В интерфейсе `TaskManager` появляется метод
 
-
 ```java
+import oldFilesForTracker.Task;
+
 List<Task> getHistory();   // возвращает последние 10 просмотров
 ```
  
@@ -287,7 +288,7 @@ List<Task> getHistory();   // возвращает последние 10 про�
 
 Заведите в `InMemoryTaskManager` поле
 
-`private final List<Task> history = new ArrayList<>();`
+`private final List<oldFilesForTracker.Task> history = new ArrayList<>();`
 
 и обновляйте его в трёх «get…»‑методах.
 
@@ -358,12 +359,13 @@ public enum TaskStatus { NEW, IN_PROGRESS, DONE }
  
 2. Объявите интерфейс
 
-
-
 ```java
+import oldFilesForTracker.Task;
+
 public interface HistoryManager {
-    void add(Task task);
-    List<Task> getHistory();
+  void add(Task task);
+
+  List<Task> getHistory();
 }
 ```
  
@@ -422,7 +424,7 @@ public static HistoryManager getDefaultHistory() { … }
 | 2. Утилитарные / фабричные классы | • Baeldung: Static Factory Methods  • Habrahabr: Паттерн «Фабрика» в Java | Класс Managers — это статическая «фабрика» для выдачи нужных реализаций. | 
 | 3. Неизменяемые коллекции и «защитные» копии | • Baeldung: Collections.unmodifiableXXX()  • Oracle Docs: Defensive Copies | Чтобы не отдавать наружу «живые» карты/списки из менеджера. | 
 | 4. Структуры данных для истории | • Baeldung: LinkedList vs ArrayList  • Metanit: LinkedHashMap и Deque | Историю (последние 10 задач) можно хранить в LinkedList, а в следующем спринте понадобится «список + хеш‑карта». | 
-| 5. equals() / hashCode() и контракт коллекций | • Metanit: equals и hashCode | Чтобы корректно сравнивать объекты Task при поиске дублей в истории. | 
+| 5. equals() / hashCode() и контракт коллекций | • Metanit: equals и hashCode | Чтобы корректно сравнивать объекты oldFilesForTracker.Task при поиске дублей в истории. | 
 | 6. Исключения‑практика | • Baeldung: Checked vs Unchecked Exceptions | Будете решать, где бросать RuntimeException, а где — проверяемые. | 
 | 7. Статусы как enum (повтор + углубление) | • Habr: Перечисления (enum) в Java  • Baeldung: Switch on Enum | Нужно заменить строки "NEW" … на TaskStatus и использовать switch. | 
 | 8. Юнит‑тестирование JUnit 5 (расширено) | • Baeldung: Guide to JUnit 5  • JUnit 5 User Guide: Parameterized Tests | Проверить getHistory(), работу фабрики Managers, корректность расчёта статусов. | 
@@ -442,7 +444,7 @@ public static HistoryManager getDefaultHistory() { … }
 | 2 | Статические фабрики | Создайте class ShapeFactory с static Figure ofSquare(double side) и ofRectangle(w,h). Запретите new ShapeFactory() через private конструктор. | 
 | 3 | Неизменяемые коллекции | Метод unmodifiableGrades(Map<String,Integer>) возвращает read‑only карту. Проверьте, что put() бросает исключение. | 
 | 4 | LinkedList vs ArrayList | Измерьте (System.nanoTime) время вставки 10 000 элементов в начало ArrayList и LinkedList, выведите результаты. | 
-| 5 | equals / hashCode | Переопределите эти методы в Task(id,name), чтобы new Task(1,"a").equals(new Task(1,"b")) было true. Покройте тестом. | 
+| 5 | equals / hashCode | Переопределите эти методы в oldFilesForTracker.Task(id,name), чтобы new oldFilesForTracker.Task(1,"a").equals(new oldFilesForTracker.Task(1,"b")) было true. Покройте тестом. | 
 | 6 | Checked vs Unchecked | Напишите метод FileUtils.readText(Path p) – он бросает IOException (checked). Вызовите его из main, отловите и выведите сообщение. | 
 | 7 | enum + switch | Расширьте enum TaskStatus значением BLOCKED. Метод canStart(TaskStatus) возвращает true только для NEW. Используйте switch. | 
 | 8 | JUnit 5 — параметризованный тест | Протестируйте canStart() из п.7 на всех значениях TaskStatus с @CsvSource. | 
@@ -493,17 +495,17 @@ public static HistoryManager getDefaultHistory() { … }
                     +--------+--------+
                              |
 +---------+   prev   +-------v-------+   next   +---------+
-|  head   | <------> |   Node<Task>  | <------> |  tail   |
+|  head   | <------> |   Node<oldFilesForTracker.Task>  | <------> |  tail   |
 +---------+          +---------------+          +---------+
 ```
 
 | Компонент | Что делает | 
 | --- | --- | 
-| Node | Task data; Node prev; Node next; | 
-| CustomLinkedList (внутри InMemoryHistoryManager) | • linkLast(Task) — добавляет в конец.• removeNode(Node) — вырезает за O(1).• getTasks() — собирает ArrayList<Task> (итерация слева → направо). | 
+| Node | oldFilesForTracker.Task data; Node prev; Node next; | 
+| CustomLinkedList (внутри InMemoryHistoryManager) | • linkLast(oldFilesForTracker.Task) — добавляет в конец.• removeNode(Node) — вырезает за O(1).• getTasks() — собирает ArrayList<oldFilesForTracker.Task> (итерация слева → направо). | 
 | index : HashMap<Integer, Node> | Держит быстрый доступ id → Node. | 
 
-2.1 Метод `add(Task task)`
+2.1 Метод `add(oldFilesForTracker.Task task)`
  
 2. Если `task == null` — игнорируем.
  
@@ -568,11 +570,11 @@ if (node != null) {
  
 2. **Создать** 
  
-  - 2 `Task`
+  - 2 `oldFilesForTracker.Task`
  
-  - `Epic` #1 + 3 `Subtask`
+  - `oldFilesForTracker.Epic` #1 + 3 `Subtask`
  
-  - `Epic` #2 без подзадач
+  - `oldFilesForTracker.Epic` #2 без подзадач
  
 4. **Просмотреть**  задачи в случайном порядке, некоторые дважды.
 
@@ -580,7 +582,7 @@ if (node != null) {
  
 6. **Удалить**  обычную задачу → в истории она исчезает.
  
-8. **Удалить**  `Epic` #1 → из истории пропадает сам эпик **и его 3 подзадачи** .
+8. **Удалить**  `oldFilesForTracker.Epic` #1 → из истории пропадает сам эпик **и его 3 подзадачи** .
 
 
 
