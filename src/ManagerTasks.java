@@ -75,6 +75,18 @@ public class ManagerTasks {
         return task;
     }
 
+    //public Status updateStatus() {}
 
+    public void deleteTask(int id) {
+        if (taskMap.containsKey(id)) {
+            taskMap.remove(id);
+        } else if (epicMap.containsKey(id)) {
+            epicMap.remove(id);
+        } else if (subTaskMap.containsKey(id)) {
+            subTaskMap.remove(id);
+        } else {
+            throw new NullPointerException("введен неверный id " + id);
+        }
+    }
 
 }
