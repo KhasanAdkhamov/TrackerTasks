@@ -69,13 +69,16 @@ public class ManagerTasks {
             taskMap.put(task.getId(), task);
         } else if (task.getClass() == Epic.class){
             epicMap.put(task.getId(), (Epic) task);
+            for (SubTask subTask: ((Epic) task).getSubTaskList()) {
+                subTaskMap.put(subTask.getId(), subTask);
+            }
         } else {
             subTaskMap.put(task.getId(), (SubTask) task);
         }
         return task;
     }
 
-    //public Status updateStatus() {}
+   // public Status updateStatus() {}
 
     public void deleteTask(int id) {
         if (taskMap.containsKey(id)) {
