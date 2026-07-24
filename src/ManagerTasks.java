@@ -1,7 +1,5 @@
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Stream;
 
 public class ManagerTasks {
     private Map<Integer, Task> taskMap = new LinkedHashMap<>();
@@ -28,7 +26,6 @@ public class ManagerTasks {
                 listTask.add((T) value);
             }
         }
-        System.out.println(listTask);
         return listTask;
     }
 
